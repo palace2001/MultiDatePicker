@@ -1,4 +1,36 @@
-.multiDatePicker {
+body {
   width: 100%; }
+
+.multiDatePicker {
+  width: 960px; }
+  .multiDatePicker > * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  .multiDatePicker #header {
+    width: 100%; }
+    .multiDatePicker #header #left, .multiDatePicker #header #center, .multiDatePicker #header #right {
+      width: 33.3333333%; }
+  .multiDatePicker #content .row {
+    width: 100%;
+    list-style-type: disc;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+    letter-spacing: -0.15em;
+    word-spacing: -0.15em;
+    padding: 0;
+    margin: 0; }
+    .multiDatePicker #content .row .date {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      width: 14%;
+      border: 1px solid #3498db;
+      color: #3498db;
+      text-align: center;
+      cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */
