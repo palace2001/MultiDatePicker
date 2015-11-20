@@ -22,3 +22,4 @@ function set_Today() {
 function draw() {
 	$(".multiDatePicker").append();
 }
+
