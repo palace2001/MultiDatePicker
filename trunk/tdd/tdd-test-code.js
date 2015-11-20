@@ -3,7 +3,9 @@
 // 타입체크 테스트
 module("Test 1")
 QUnit.test( "Today Testing", function( assert ) {
-	var result1 = set_CurrentDate();
+
+	
+    var result1 = set_CurrentDate();
 	var result2 = set_CurrentMonth();
 	var result3 = set_CurrentYear();
 	var result4 = set_CurrentDay(); 
@@ -14,12 +16,7 @@ QUnit.test( "Today Testing", function( assert ) {
 	equal(result4, 5,"Testing Passed!");	  
 });
 
-module("Test 2")
-QUnit.test( "Today Testing 2", function( assert ) {
-    
-	equal(result,'string',"Testing Passed!");
-		  
-}); 
+
 
 
 
