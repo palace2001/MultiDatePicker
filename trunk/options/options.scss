@@ -1,58 +1,7 @@
 @charset "utf-8";
 
-$calendarWidth : 960px;
-$border-line-width : 1px;
-$border-line-color-date : #3498db;
-$date-text-color : #3498db;
-
-body{
-	width:100%;
-}
+$calendarWidth : 100%;
 
 .multiDatePicker{
-
-	& > *{
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-
 	width : $calendarWidth;
-
-	#header{
-		width: 100%;
-
-		#left, #center, #right{
-			width: 33.3333333%;
-		}
-	}
-
-	#content{
-
-		.row{
-			width: 100%;
-			list-style-type: disc;
-			-webkit-margin-before: 0em;
-			-webkit-margin-after: 0em;
-			-webkit-margin-start: 0px;
-			-webkit-margin-end: 0px;
-			-webkit-padding-start: 0px;
-			letter-spacing:-0.15em;
-			word-spacing:-0.15em;
-			padding:0;
-			margin: 0;
-
-			.date{
-				display: inline-block;
-				margin: 0;
-				padding: 0;
-				width:14%;
-				border : $border-line-width solid $border-line-color-date;
-				color: $date-text-color;
-				text-align: center;
-				cursor: pointer;
-			}
-		}
-
-	}
 }
