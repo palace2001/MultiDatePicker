@@ -36,7 +36,7 @@ function get_FirstDay(){
 
 function get_LastDay(){
 	//날짜 초기화
-	var d = new Date(set_CurrentYear(),set_CurrentMonth(),get_day_max());
+	var d = new Date(set_CurrentYear(),set_CurrentMonth(),get_day_max(set_CurrentYear(),set_CurrentMonth()));
 	return d.getDay();
 }
 
