@@ -23,3 +23,7 @@ function draw() {
 	$(".multiDatePicker").append();
 }
 
+
+$(".day").bind("click", function(e){
+	var pickeddate = $(this).attr("dateValue");
+});
