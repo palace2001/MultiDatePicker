@@ -20,10 +20,10 @@ function set_Today() {
 }
 
 function draw() {
-	var firstDay = 
+	var firstDay = 0;
 	while(j<day_max){
 		if(j%7==0){
-			console.log("<br>)";
+			console.log("<br>");
 		}
 	}
 }
