@@ -29,14 +29,12 @@ function draw() {
 }
 
 function get_FirstDay(){
-	//날짜 초기화
-	var d = new Date(set_CurrentYear(),set_CurrentMonth(),1);
+	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,1);
 	return d.getDay();
 }
 
 function get_LastDay(){
-	//날짜 초기화
-	var d = new Date(set_CurrentYear(),set_CurrentMonth(),get_day_max(set_CurrentYear(),set_CurrentMonth()));
+	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,get_day_max(set_CurrentYear(),set_CurrentMonth()-1));
 	return d.getDay();
 }
 
