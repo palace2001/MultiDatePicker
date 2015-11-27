@@ -19,16 +19,6 @@ function set_Today() {
 	return convertDateToText[index];
 } 
 
-function draw() {
-	var firstDay = 1;
-	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
-		console.log(firstDay);
-		if(j%7==0){
-			console.log("<br>");
-		}
-	}
-}
-
 function get_FirstDay(){
 	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,1);
 	return d.getDay();
@@ -47,6 +37,27 @@ function get_day_max(year,month){
 		i++;
 	}
 	return i-1;
+}
+
+function draw() {
+	var firstDay = 1;
+	for(firstDay+get_FirstBlack() ; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
+		console.log(firstDay);
+		if(j%7==0){
+			console.log("<br>");
+		}
+	}
+}
+
+function get_FirstBlack(){
+	return get_FirstDay();
+}
+
+function get_LastBlack(){
+	if(get_LastDay()!=0){
+		return 6-get_lastDay();
+	}
+	return 0;
 }
 
 $(".day").bind("click", function(e){
