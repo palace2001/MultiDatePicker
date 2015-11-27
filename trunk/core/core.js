@@ -1,5 +1,7 @@
 var dt = new Date();
 var convertDateToText = ["일", "월", "화", "수", "목", "금", "토"];
+var month;
+var year; 
 
 $(document).ready(function(){
 draw();
@@ -9,10 +11,12 @@ function set_CurrentDate() {
 	return dt.getDate();
 }
 function set_CurrentMonth() {
-	return dt.getMonth() + 1;
+	month = dt.getMonth() + 1;
+	return month;
 }
 function set_CurrentYear() {
-	return dt.getFullYear();
+	year = dt.getFullYear();
+	return year;
 }
 function set_CurrentDay() {
 	return dt.getDay();
