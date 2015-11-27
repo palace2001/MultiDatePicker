@@ -2,7 +2,7 @@ body {
   width: 100%; }
 
 .multiDatePicker {
-  width: 960px; }
+  width: 100%; }
   .multiDatePicker > * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -10,7 +10,14 @@ body {
   .multiDatePicker #header {
     width: 100%; }
     .multiDatePicker #header #left, .multiDatePicker #header #center, .multiDatePicker #header #right {
-      width: 33.3333333%; }
+      display: inline-block;
+      width: 33%; }
+    .multiDatePicker #header #left {
+      text-align: left; }
+    .multiDatePicker #header #center {
+      text-align: center; }
+    .multiDatePicker #header #right {
+      text-align: right; }
   .multiDatePicker #content .row {
     width: 100%;
     list-style-type: disc;

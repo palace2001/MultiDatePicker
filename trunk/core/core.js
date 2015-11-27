@@ -39,6 +39,7 @@ function get_day_max(year,month){
 	return i-1;
 }
 
+<<<<<<< HEAD
 function draw() {
 	var firstDay = 1;
 	for(firstDay+get_FirstBlack() ; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
@@ -63,3 +64,20 @@ function get_LastBlack(){
 $(".day").bind("click", function(e){
 	var pickeddate = $(this).attr("dateValue");
 });
+=======
+function bindingClickEvent(){
+	$(".day").bind("click", function(e){
+		var pickeddate = $(this).attr("dateValue");
+	});
+}
+
+//drawing functions area
+
+function setRowHeight(){
+	$(".date").each(function(){
+		var row = $(this).parent('.row');
+		var rowheight = $(row).height();
+		$(this).css("height", rowheight);
+	});
+}
+>>>>>>> origin/master
