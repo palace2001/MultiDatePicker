@@ -11,7 +11,7 @@ body {
     width: 100%; }
     .multiDatePicker #header #left, .multiDatePicker #header #center, .multiDatePicker #header #right {
       display: inline-block;
-      width: 33.3333333%; }
+      width: 33%; }
     .multiDatePicker #header #left {
       text-align: left; }
     .multiDatePicker #header #center {
