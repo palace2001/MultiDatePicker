@@ -55,7 +55,7 @@ function get_FirstBlank(){
 
 function get_LastBlank(){
 	if(get_LastDay()!=0){
-		return 6-get_lastDay();
+		return 6-get_LastDay();
 	}
 	return 0;
 }
