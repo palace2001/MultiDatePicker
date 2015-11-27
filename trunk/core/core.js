@@ -40,10 +40,10 @@ function get_day_max(year,month){
 }
 
 function draw() {
-	var firstDay = 1;
-	for(firstDay+get_FirstBlank() ; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
+	var firstDay = 1+get_FirstBlank();
+	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
 		console.log(firstDay);
-		if(j%7==0){
+		if(firstDay%7==0){
 			console.log("<br>");
 		}
 	}
