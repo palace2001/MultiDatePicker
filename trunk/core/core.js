@@ -24,12 +24,12 @@ function set_Today() {
 } 
 
 function get_FirstDay(){
-	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,1);
+	var d = new Date(set_CurrentYear(),set_CurrentMonth(),1);
 	return d.getDay();
 }
 
 function get_LastDay(){
-	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,get_day_max(set_CurrentYear(),set_CurrentMonth()-1));
+	var d = new Date(set_CurrentYear(),set_CurrentMonth(),get_day_max(set_CurrentYear(),set_CurrentMonth()));
 	return d.getDay();
 }
 
