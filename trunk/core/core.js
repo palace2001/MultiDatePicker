@@ -1,6 +1,10 @@
 var dt = new Date();
 var convertDateToText = ["일", "월", "화", "수", "목", "금", "토"];
 
+$(document).ready(function(){
+draw();
+});
+
 function set_CurrentDate() {
 	return dt.getDate();
 }
@@ -41,12 +45,27 @@ function get_day_max(year,month){
 
 function draw() {
 	var firstDay = 1+get_FirstBlank();
+
+	var str = draw_prevBlank();
+
 	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
-		console.log(firstDay);
+		str += '<li class="date">' + firstDay + '</li>';
 		if(firstDay%7==0){
-			console.log("<br>");
+			str += '</ul><ul class="row">';
 		}
 	}
+
+	str += draw_lastBlank();
+
+	$("#content").append(str);
+}
+
+function draw_prevBlank(){
+	var str = '<ul class="row">';
+	for (var i = 0; i < get_FirstBlank(); i++) {
+		str += '<li class="date"> . </li>';
+	}
+	return str;
 }
 
 function get_FirstBlank(){
@@ -58,6 +77,15 @@ function get_LastBlank(){
 		return 6-get_LastDay();
 	}
 	return 0;
+}
+
+function draw_lastBlank(){
+	var str = '';
+	for (var i = 0; i < get_LastBlank(); i++) {
+		str += '<li class="date"> . </li>';
+	}
+	str += '</ul>';
+	return str;
 }
 
 $(".day").bind("click", function(e){
