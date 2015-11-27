@@ -24,12 +24,12 @@ function set_Today() {
 } 
 
 function get_FirstDay(){
-	var d = new Date(set_CurrentYear(),set_CurrentMonth(),1);
+	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,1);
 	return d.getDay();
 }
 
 function get_LastDay(){
-	var d = new Date(set_CurrentYear(),set_CurrentMonth(),get_day_max(set_CurrentYear(),set_CurrentMonth()));
+	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,get_day_max(set_CurrentYear(),set_CurrentMonth()-1));
 	return d.getDay();
 }
 
@@ -48,7 +48,7 @@ function draw() {
 
 	var str = draw_prevBlank();
 
-	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
+	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()-1) ; firstDay++){
 		str += '<li class="date">' + firstDay + '</li>';
 		if(firstDay%7==0){
 			str += '</ul><ul class="row">';
@@ -81,7 +81,7 @@ function get_LastBlank(){
 
 function draw_lastBlank(){
 	var str = '';
-	for (var i = 1; i < get_LastBlank(); i++) {
+	for (var i = 0; i < get_LastBlank(); i++) {
 		str += '<li class="date"> . </li>';
 	}
 	str += '</ul>';
