@@ -81,7 +81,7 @@ function get_LastBlank(){
 
 function draw_lastBlank(){
 	var str = '';
-	for (var i = 0; i < get_LastBlank(); i++) {
+	for (var i = 1; i < get_LastBlank(); i++) {
 		str += '<li class="date"> . </li>';
 	}
 	str += '</ul>';
