@@ -21,10 +21,19 @@ QUnit.test( "Today Testing", function( assert ) {
 module("Test 2")
 QUnit.test( "Day Of This Month Testing", function( assert ) {
 	  var resultFirstDay = get_FirstDay();
-	  var resultLastDay = get_LastDay(2015,11);
+	  var resultDayMax = get_day_max(2015,10);
+	  var resultLastDay = get_LastDay();
+	  
+	  
+
+
 
 	  equal(resultFirstDay, 0,"Testing Passed!");
+	  equal(resultDayMax, 30,"Testing Passed!");
 	  equal(resultLastDay, 1,"Testing Passed!");
+	  
+	
+
 
 });
 
