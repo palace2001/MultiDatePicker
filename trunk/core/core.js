@@ -17,11 +17,12 @@ function set_CurrentDay() {
 function set_Today() {
 	var index = dt.getDay();
 	return convertDateToText[index];
-}
+} 
 
 function draw() {
-	var firstDay = 0;
-	while(j<day_max){
+	var firstDay = 1;
+	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()) ; firstDay++){
+		console.log(firstDay);
 		if(j%7==0){
 			console.log("<br>");
 		}
