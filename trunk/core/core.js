@@ -49,11 +49,11 @@ function draw() {
 	}
 }
 
-function get_FirstBlack(){
+function get_FirstBlank(){
 	return get_FirstDay();
 }
 
-function get_LastBlack(){
+function get_LastBlank(){
 	if(get_LastDay()!=0){
 		return 6-get_lastDay();
 	}
