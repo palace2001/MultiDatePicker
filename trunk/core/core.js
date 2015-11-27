@@ -49,6 +49,18 @@ function get_day_max(year,month){
 	return i-1;
 }
 
-$(".day").bind("click", function(e){
-	var pickeddate = $(this).attr("dateValue");
-});
+function bindingClickEvent(){
+	$(".day").bind("click", function(e){
+		var pickeddate = $(this).attr("dateValue");
+	});
+}
+
+//drawing functions area
+
+function setRowHeight(){
+	$(".date").each(function(){
+		var row = $(this).parent('.row');
+		var rowheight = $(row).height();
+		$(this).css("height", rowheight);
+	});
+}
