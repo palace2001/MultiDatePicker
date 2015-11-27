@@ -11,7 +11,7 @@ QUnit.test( "Today Testing", function( assert ) {
 	var resultDay = set_CurrentDay(); 
 	var resultToday = typeof(set_Today());
 	
-	equal(resultDate, 20,"Testing Passed!");
+	equal(resultDate, 27,"Testing Passed!");
 	equal(resultMonth, 11,"Testing Passed!");
 	equal(resultYear, 2015,"Testing Passed!");
 	equal(resultDay, 5,"Testing Passed!");
@@ -25,6 +25,17 @@ QUnit.test( "Day Of This Month Testing", function( assert ) {
 
 	  equal(resultFirstDay, 0,"Testing Passed!");
 	  equal(resultLastDay, 1,"Testing Passed!");
+
+});
+
+
+module("Test 3")
+QUnit.test( "Length of Blank", function( assert ) {
+	  var resultFirstBlank = get_FirstBlank();
+	  var resultLastBlank = get_LastBlank();
+
+	  equal(resultFirstBlank, 0,"Testing Passed!");
+	  equal(resultLastBlank, 5,"Testing Passed!");
 
 });
 
