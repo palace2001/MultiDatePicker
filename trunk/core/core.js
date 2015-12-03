@@ -1,45 +1,39 @@
-var dt = new Date();
 var convertDateToText = ["일", "월", "화", "수", "목", "금", "토"];
-var month;
-var year; 
+var today = new Date();
+var year = today.getFullYear();
+var month = today.getMonth() + 1;
+var day = today.getDate();
+
+var selectedDate = [];
 
 $(document).ready(function(){
-draw();
+	draw();
+	$("#prev").bind("click", function(){
+		prevButton();
+	});
+	$("#next").bind("click", function(){
+		nextButton();
+	});
 });
-
-function set_CurrentDate() {
-	return dt.getDate();
-}
-function set_CurrentMonth() {
-	month = dt.getMonth() + 1;
-	return month;
-}
-function set_CurrentYear() {
-	year = dt.getFullYear();
-	return year;
-}
-function set_CurrentDay() {
-	return dt.getDay();
-}
 
 function set_Today() {
 	var index = dt.getDay();
 	return convertDateToText[index];
-} 
+}
 
 function get_FirstDay(){
-	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,1);
+	var d = new Date(year,month-1,1);
 	return d.getDay();
 }
 
 function get_LastDay(){
-	var d = new Date(set_CurrentYear(),set_CurrentMonth()-1,get_day_max(set_CurrentYear(),set_CurrentMonth()-1));
+	var d = new Date(year,month-1,get_day_max(year,month-1));
 	return d.getDay();
 }
 
 function get_day_max(year,month){
 	var i = 29, cday;
-	while(i<32){
+	while(i < 32){
 		cday = new Date(year,month,i);
 		if (cday.getFullYear()!=year || cday.getMonth()!=month) break;
 		i++;
@@ -48,42 +42,43 @@ function get_day_max(year,month){
 }
 
 function draw() {
-	var firstDay = 1+get_FirstBlank();
+	var firstDay = get_FirstDay() + 1;
 
 	var str = draw_prevBlank();
 
-	for(firstDay; firstDay<=get_day_max(set_CurrentYear(),set_CurrentMonth()-1) ; firstDay++){
-		str += '<li class="date">' + firstDay + '</li>';
+	var dateNum = 1;
+	for(firstDay; dateNum <= get_day_max(year,month-1) ; firstDay++){
+		str += '<li class="date" dateValue="' + year + '-' + month + '-' + dateNum + '">' + dateNum + '</li>';
 		if(firstDay%7==0){
 			str += '</ul><ul class="row">';
 		}
+		dateNum++;
 	}
 
-	str += draw_lastBlank();
+	str += draw_LastBlank();
 
-	$("#content").append(str);
+	$("#year").empty().append(year);
+	$("#month").empty().append(month);
+	$("#content").empty().append(str);
+	bindingClickEvent();
 }
 
 function draw_prevBlank(){
 	var str = '<ul class="row">';
-	for (var i = 0; i < get_FirstBlank(); i++) {
+	for (var i = 0; i < get_FirstDay(); i++) {
 		str += '<li class="date"> . </li>';
 	}
 	return str;
-}
-
-function get_FirstBlank(){
-	return get_FirstDay();
 }
 
 function get_LastBlank(){
 	if(get_LastDay()!=0){
 		return 6-get_LastDay();
 	}
-	return 0;
+	return 6;
 }
 
-function draw_lastBlank(){
+function draw_LastBlank(){
 	var str = '';
 	for (var i = 0; i < get_LastBlank(); i++) {
 		str += '<li class="date"> . </li>';
@@ -92,13 +87,33 @@ function draw_lastBlank(){
 	return str;
 }
 
-$(".day").bind("click", function(e){
-	var pickeddate = $(this).attr("dateValue");
-});
+function prevButton(){
+	if(month != 1)
+	{
+		month --;
+	}else{
+		year --;
+		month = 12;
+	}
+	draw();
+}
+
+function nextButton(){
+	if(month != 12)
+	{
+		month ++;
+	}else{
+		year ++;
+		month = 1;
+	}
+	draw();
+}
 
 function bindingClickEvent(){
-	$(".day").bind("click", function(e){
+	$(".date").bind("click", function(e){
 		var pickeddate = $(this).attr("dateValue");
+		selectedDate.push(pickeddate);
+		console.log(selectedDate);
 	});
 }
 
