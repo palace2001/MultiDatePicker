@@ -109,11 +109,27 @@ function nextButton(){
 	draw();
 }
 
-function bindingClickEvent(){
-	$(".date").bind("click", function(e){
-		var pickeddate = $(this).attr("dateValue");
+function pushSelectedDate(pickeddate){
+	if(checkDuplicationData(pickeddate)){
+		//중복시 어떻게 이벤트를 발생시킬지 고민해봅시다.
+	}else{
 		selectedDate.push(pickeddate);
 		console.log(selectedDate);
+	}
+}
+
+function checkDuplicationData(pickeddate){
+	for (var i = 0; i < selectedDate.length; i++) {
+		if(selectedDate[i] == pickeddate){
+			return true;
+		}
+	}
+	return false;
+}
+
+function bindingClickEvent(){
+	$(".date").bind("click", function(e){	
+		pushSelectedDate($(this).attr("dateValue"));
 	});
 }
 
