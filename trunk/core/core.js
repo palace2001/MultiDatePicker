@@ -4,7 +4,10 @@ var year = today.getFullYear();
 var month = today.getMonth() + 1;
 var day = today.getDate();
 
+var clickedYear;
 var selectedDate = [];
+var selectedMonth = [];
+var selectedYear = [];
 
 $(document).ready(function(){
 	draw();
@@ -13,6 +16,9 @@ $(document).ready(function(){
 	});
 	$("#next").bind("click", function(){
 		nextButton();
+	});
+	$("#today").bind("click", function(){
+		todayButton();
 	});
 });
 
@@ -95,6 +101,13 @@ function prevButton(){
 		year --;
 		month = 12;
 	}
+	draw();
+}
+
+function todayButton(){
+	year = today.getFullYear();
+	month = today.getMonth() + 1;
+	day = today.getDate();
 	draw();
 }
 
