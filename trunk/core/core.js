@@ -36,21 +36,37 @@ function bindingClickEventForHeaderButton(){
 	});
 }
 
+/**
+ * Function : set_Today
+ *   - 오늘의 날짜를 구함
+ */
 function set_Today() {
 	var index = today.getDay();
 	return convertDateToText[index];
 }
 
+/**
+ * Function : get_FirstDay
+ *   - 해당하는 달 1일의 요일을 구함
+ */
 function get_FirstDay(){
 	var d = new Date(year,month-1,1);
 	return d.getDay();
 }
 
+/**
+ * Function : get_LastDay
+ *   - year, month 그리고 아2래에 있는 get_day_max를 이용하여 마지막 일의 요일을 구함
+ */
 function get_LastDay(){
 	var d = new Date(year,month-1,get_day_max(year,month-1));
 	return d.getDay();
 }
 
+/**
+ * Function : get_day_max
+ *   - parameter로 받아오는 년(year),월(month)의 마지막 일을 구함
+ */
 function get_day_max(year,month){
 	var i = 29, cday;
 	while(i < 32){
@@ -61,6 +77,11 @@ function get_day_max(year,month){
 	return i-1;
 }
 
+/**
+ * Function : draw_prevBlank
+ *   - for문을 이용하여 1일 시작 전까지의 공백을 그림
+ *   - ex) 만약 1일이 수요일이라면 일요일, 월요일, 화요일 칸을 생성
+ */
 function draw_prevBlank(){
 	var str = '<ul class="row">';
 	for (var i = 0; i < get_FirstDay(); i++) {
@@ -69,6 +90,12 @@ function draw_prevBlank(){
 	return str;
 }
 
+/**
+ * Function : get_LastBlank
+ *   - 마지막 날부터 해당 주의 토요일까지 몇 개의 빈칸을 생성해야 하는지 알아냄
+ *   - ex) 만약 마지막 날이 목요일이라면 금요일, 토요일 칸을 생성해야함 => 해당 월 마지막 공백의 수를 리턴
+ *   - (+)마지막날이 토요일이면 추가로 생성할 필요가 없으므로 실행하지 않음
+ */
 function get_LastBlank(){
 	if(get_LastDay()!=0){
 		return 6-get_LastDay();
@@ -76,6 +103,10 @@ function get_LastBlank(){
 	return 6;
 }
 
+/**
+ * Function : draw_LastBlank
+ *   - 해당하는 월의 마지막 공백을 그림
+ */
 function draw_LastBlank(){
 	var str = '';
 	for (var i = 0; i < get_LastBlank(); i++) {
