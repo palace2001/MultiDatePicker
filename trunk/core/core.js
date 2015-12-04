@@ -4,7 +4,7 @@ var year = today.getFullYear();
 var month = today.getMonth() + 1;
 var day = today.getDate();
 
-var clickedYear;
+var clickedYear = null;
 var selectedDate = [];
 var selectedMonth = [];
 var selectedYear = [];
@@ -209,7 +209,11 @@ function bindingDateClickEvent(){
 
 function bindingMonthClickEvent(){
 	$("#monthSelect li").bind("click", function(e){
-		pushSelectedMonth(clickedYear + '-' + $(this).attr("dateValue"));
+		if(clickedYear == null){
+			alert("연도를 선택해 주세요!");
+		}else{
+			pushSelectedMonth(clickedYear + '-' + $(this).attr("dateValue"));
+		}
 	});
 }
 
