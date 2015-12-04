@@ -10,7 +10,10 @@ var selectedMonth = [];
 var selectedYear = [];
 
 $(document).ready(function(){
-	draw();
+	ymdSelectMode();
+});
+
+function binding(){
 	$("#prev").bind("click", function(){
 		prevButton();
 	});
@@ -20,7 +23,16 @@ $(document).ready(function(){
 	$("#today").bind("click", function(){
 		todayButton();
 	});
-});
+	$("#y-select").bind("click", function(){
+		ySelectMode();
+	});
+	$("#ym-select").bind("click", function(){
+		ymSelectMode();
+	});
+	$("#ymd-select").bind("click", function(){
+		ymdSelectMode();
+	});
+}
 
 function set_Today() {
 	var index = dt.getDay();
@@ -45,28 +57,6 @@ function get_day_max(year,month){
 		i++;
 	}
 	return i-1;
-}
-
-function draw() {
-	var firstDay = get_FirstDay() + 1;
-
-	var str = draw_prevBlank();
-
-	var dateNum = 1;
-	for(firstDay; dateNum <= get_day_max(year,month-1) ; firstDay++){
-		str += '<li class="date" dateValue="' + year + '-' + month + '-' + dateNum + '">' + dateNum + '</li>';
-		if(firstDay%7==0){
-			str += '</ul><ul class="row">';
-		}
-		dateNum++;
-	}
-
-	str += draw_LastBlank();
-
-	$("#year").empty().append(year);
-	$("#month").empty().append(month);
-	$("#content").empty().append(str);
-	bindingClickEvent();
 }
 
 function draw_prevBlank(){
@@ -101,14 +91,14 @@ function prevButton(){
 		year --;
 		month = 12;
 	}
-	draw();
+	ymdDraw();
 }
 
 function todayButton(){
 	year = today.getFullYear();
 	month = today.getMonth() + 1;
 	day = today.getDate();
-	draw();
+	ymdDraw();
 }
 
 function nextButton(){
@@ -119,7 +109,24 @@ function nextButton(){
 		year ++;
 		month = 1;
 	}
-	draw();
+	ymdDraw();
+}
+
+function ySelectMode(){
+
+}
+
+function ymSelectMode(){
+	headerDraw("ym");
+	ymDraw();
+	yearDraw();
+	binding();
+}
+
+function ymdSelectMode(){
+	headerDraw("ymd");
+	ymdDraw();
+	binding();
 }
 
 function pushSelectedDate(pickeddate){
@@ -140,13 +147,68 @@ function checkDuplicationData(pickeddate){
 	return false;
 }
 
-function bindingClickEvent(){
+function bindingDateClickEvent(){
 	$(".date").bind("click", function(e){	
 		pushSelectedDate($(this).attr("dateValue"));
 	});
 }
 
 //drawing functions area
+
+function headerDraw(mode){
+	switch(mode){
+		case 'y':
+		var str = '';
+		break;
+		case 'ym':
+		var str = '<div id="header"><span id="left"><span id="modeSelectButtonGroup"><button id="y-select">년</button><button id="ym-select">년-월</button><button id="ymd-select">년-월-일</button></span></span><span id="center"><ul id="yearSelect"></ul></span><span id="right"><span id="moveButtonGroup"><button id="prev">이전</button><button id="today">오늘</button><button id="next">다음</button></span></span>';
+		break;
+		case 'ymd':
+		var str = '<div id="header"><span id="left"><span id="modeSelectButtonGroup"><button id="y-select">년</button><button id="ym-select">년-월</button><button id="ymd-select">년-월-일</button></span></span><span id="center"><h1 id="calendarTitle"><span id="year"></span>년 <span id="month"></span>월</h1></span><span id="right"><span id="moveButtonGroup"><button id="prev">이전</button><button id="today">오늘</button><button id="next">다음</button></span></span></div>';
+		break;
+	}
+	str += '<div id="content"></div>';
+	$(".multiDatePicker").empty().append(str);
+}
+
+function ymdDraw() {
+	var firstDay = get_FirstDay() + 1;
+
+	var str = draw_prevBlank();
+
+	var dateNum = 1;
+	for(firstDay; dateNum <= get_day_max(year,month-1) ; firstDay++){
+		str += '<li class="date" dateValue="' + year + '-' + month + '-' + dateNum + '">' + dateNum + '</li>';
+		if(firstDay%7==0){
+			str += '</ul><ul class="row">';
+		}
+		dateNum++;
+	}
+
+	str += draw_LastBlank();
+
+	$("#year").empty().append(year);
+	$("#month").empty().append(month);
+	$("#content").empty().append(str);
+	bindingDateClickEvent();
+}
+
+function ymDraw(){
+	var str = '<ul id="monthSelect">';
+	for (var i = 1; i < 13; i++) {
+		str += '<li dateValue="' + i + '">' + i + '</li>';
+	};
+	$("#content").append(str);
+}
+
+function yearDraw(){
+
+	var str = '';
+	for (var i = 0; i < 7; i++) {
+		str += '<li>' + (year + i - 3) + '</li>';
+	}
+	$("#yearSelect").empty().append(str);
+}
 
 function setRowHeight(){
 	$(".date").each(function(){
@@ -155,4 +217,3 @@ function setRowHeight(){
 		$(this).css("height", rowheight);
 	});
 }
-
