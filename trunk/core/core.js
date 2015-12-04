@@ -274,9 +274,15 @@ function headerDraw(mode){
 }
 
 function ymdDraw() {
+	var str = '<ul class="row">';
+	for (var i = 0; i < 7; i++) {
+		str += '<li class="weekText">' + convertDateToText[i] + '</li>';
+	}
+	str += '</ul>';
+
 	var firstDay = get_FirstDay() + 1;
 
-	var str = draw_prevBlank();
+	str += draw_prevBlank();
 
 	var dateNum = 1;
 	for(firstDay; dateNum <= get_day_max(year,month-1) ; firstDay++){
