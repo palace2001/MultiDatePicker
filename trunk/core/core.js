@@ -13,7 +13,7 @@ $(document).ready(function(){
 	ymdSelectMode();
 });
 
-function binding(){
+function bindingClickEventForHeaderButton(){
 	$("#prev").bind("click", function(){
 		prevButton();
 	});
@@ -35,7 +35,7 @@ function binding(){
 }
 
 function set_Today() {
-	var index = dt.getDay();
+	var index = today.getDay();
 	return convertDateToText[index];
 }
 
@@ -120,13 +120,13 @@ function ymSelectMode(){
 	headerDraw("ym");
 	ymDraw();
 	yearDraw();
-	binding();
+	bindingClickEventForHeaderButton();
 }
 
 function ymdSelectMode(){
 	headerDraw("ymd");
 	ymdDraw();
-	binding();
+	bindingClickEventForHeaderButton();
 }
 
 function pushSelectedDate(pickeddate){
@@ -134,6 +134,24 @@ function pushSelectedDate(pickeddate){
 		//중복시 어떻게 이벤트를 발생시킬지 고민해봅시다.
 	}else{
 		selectedDate.push(pickeddate);
+		console.log(selectedDate);
+	}
+}
+
+function pushSelectedMonth(pickedMonth){
+	if (checkDuplicationData(pickedMonth)) {
+
+	}else{
+		selectedDate.push(pickedMonth);
+		console.log(selectedDate);
+	}
+}
+
+function pushSelectedYear(pickedYear){
+	if (checkDuplicationData(pickedYear)) {
+
+	}else{
+		selectedDate.push(pickedYear);
 		console.log(selectedDate);
 	}
 }
@@ -150,6 +168,19 @@ function checkDuplicationData(pickeddate){
 function bindingDateClickEvent(){
 	$(".date").bind("click", function(e){	
 		pushSelectedDate($(this).attr("dateValue"));
+	});
+}
+
+function bindingMonthClickEvent(){
+	$("#monthSelect li").bind("click", function(e){
+		pushSelectedMonth(clickedYear + '-' + $(this).attr("dateValue"));
+	});
+}
+
+function bindingYearClickEvent(){
+	$("#yearSelect li").bind("click", function(e){
+		clickedYear = $(this).attr("dateValue");
+		console.log(clickedYear);
 	});
 }
 
@@ -199,15 +230,16 @@ function ymDraw(){
 		str += '<li dateValue="' + i + '">' + i + '</li>';
 	};
 	$("#content").append(str);
+	bindingMonthClickEvent();
 }
 
 function yearDraw(){
-
 	var str = '';
 	for (var i = 0; i < 7; i++) {
-		str += '<li>' + (year + i - 3) + '</li>';
+		str += '<li dateValue="' + (year + i - 3) + '">' + (year + i - 3) + '</li>';
 	}
 	$("#yearSelect").empty().append(str);
+	bindingYearClickEvent();
 }
 
 function setRowHeight(){

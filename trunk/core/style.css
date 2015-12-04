@@ -16,28 +16,58 @@ body {
       text-align: left; }
     .multiDatePicker #header #center {
       text-align: center; }
+      .multiDatePicker #header #center #yearSelect {
+        width: 100%;
+        margin: 0;
+        padding: 0; }
+        .multiDatePicker #header #center #yearSelect li {
+          display: inline-block;
+          margin: 0;
+          padding: 0;
+          width: 13.8%;
+          border: 1px solid #3498db;
+          color: #3498db;
+          text-align: center;
+          cursor: pointer; }
     .multiDatePicker #header #right {
       text-align: right; }
-  .multiDatePicker #content .row {
+  .multiDatePicker #content {
     width: 100%;
-    list-style-type: disc;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 0px;
-    letter-spacing: -0.15em;
-    word-spacing: -0.15em;
-    padding: 0;
-    margin: 0; }
-    .multiDatePicker #content .row .date {
-      display: inline-block;
-      margin: 0;
+    margin: 0;
+    padding: 0; }
+    .multiDatePicker #content .row {
+      width: 100%;
+      list-style-type: disc;
+      -webkit-margin-before: 0em;
+      -webkit-margin-after: 0em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 0px;
+      letter-spacing: -0.15em;
+      word-spacing: -0.15em;
       padding: 0;
-      width: 14%;
-      border: 1px solid #3498db;
-      color: #3498db;
-      text-align: center;
-      cursor: pointer; }
+      margin: 0; }
+      .multiDatePicker #content .row .date {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        width: 14%;
+        border: 1px solid #3498db;
+        color: #3498db;
+        text-align: center;
+        cursor: pointer; }
+    .multiDatePicker #content #monthSelect {
+      width: 100%;
+      margin: 0;
+      padding: 0; }
+      .multiDatePicker #content #monthSelect li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        width: 8%;
+        border: 1px solid #3498db;
+        color: #3498db;
+        text-align: center;
+        cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */
