@@ -1,6 +1,35 @@
-// 오늘 날짜 테스트
-// 일 피커 테스트  (길이, date가 맞는지)
-// 타입체크 테스트
+/* 
+ *   Multidatepicker Testing 
+ */
+
+
+//   - Update Test Code -
+module("Final Test")
+QUnit.test( "Final Test", function( assert ) {
+
+
+	// Today Setting for Testing ...
+	  var resultSetday = set_Today();
+	  var resultTypeofsetday = typeof(set_Today());
+	  var resultFirstday = get_FirstDay();
+	  var resultLastday = get_LastDay();
+	  var resultDayMax1 = get_day_max(2015,12-1);  // ex) December
+	  var resultDayMax2 = get_day_max(2016,2-1);  // ex) February
+
+	  equal(resultSetday, '금',"Testing Passed!");
+	  equal(resultTypeofsetday, 'string',"Testing Passed!");
+	  equal(resultFirstday, 2,"Testing Passed!");
+	  equal(resultLastday, 4,"Testing Passed!");
+	  equal(resultDayMax1, 31,"Testing Passed!");
+	  equal(resultDayMax2, 29,"Testing Passed!");
+
+});
+
+
+
+
+
+/*      -  Past Test Code  - 
 module("Test 1")
 QUnit.test( "Today Testing", function( assert ) {
 
@@ -11,8 +40,8 @@ QUnit.test( "Today Testing", function( assert ) {
 	var resultDay = set_CurrentDay(); 
 	var resultToday = typeof(set_Today());
 	
-	equal(resultDate, 27,"Testing Passed!");
-	equal(resultMonth, 11,"Testing Passed!");
+	equal(resultDate, 24,"Testing Passed!");
+	equal(resultMonth, 12,"Testing Passed!");
 	equal(resultYear, 2015,"Testing Passed!");
 	equal(resultDay, 5,"Testing Passed!");
 	equal(resultToday,'string',"Testing Passed!");	  
@@ -47,6 +76,10 @@ QUnit.test( "Length of Blank", function( assert ) {
 	  equal(resultLastBlank, 5,"Testing Passed!");
 
 });
+
+ */  // End
+
+
 
 
 
