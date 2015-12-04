@@ -119,13 +119,6 @@ function draw_LastBlank(){
 
 function prevButton(){
 	switch(mode){
-		case 'y':
-
-		break;
-		case 'ym':
-		year = year - 7;
-		yearDraw();
-		break;
 		case 'ymd':
 		if(month != 1)
 		{
@@ -136,6 +129,10 @@ function prevButton(){
 		}
 		ymdDraw();
 		break;
+		default:
+		year = year - 7;
+		yearDraw();
+		break;
 	}
 }
 
@@ -144,27 +141,17 @@ function todayButton(){
 	month = today.getMonth() + 1;
 	day = today.getDate();
 	switch(mode){
-		case 'y':
-
-		break;
-		case 'ym':
-		yearDraw();
-		break;
 		case 'ymd':
 		ymdDraw();
+		break;
+		default:
+		yearDraw();
 		break;
 	}
 }
 
 function nextButton(){
 	switch(mode){
-		case 'y':
-
-		break;
-		case 'ym':
-		year = year + 7;
-		yearDraw();
-		break;
 		case 'ymd':
 		if(month != 12)
 		{
@@ -174,6 +161,10 @@ function nextButton(){
 			month = 1;
 		}
 		ymdDraw();
+		break;
+		default:
+		year = year + 7;
+		yearDraw();
 		break;
 	}
 }
