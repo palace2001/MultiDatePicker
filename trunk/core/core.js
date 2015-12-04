@@ -9,6 +9,8 @@ var selectedDate = [];
 var selectedMonth = [];
 var selectedYear = [];
 
+var mode = '';
+
 $(document).ready(function(){
 	ymdSelectMode();
 });
@@ -84,32 +86,64 @@ function draw_LastBlank(){
 }
 
 function prevButton(){
-	if(month != 1)
-	{
-		month --;
-	}else{
-		year --;
-		month = 12;
+	switch(mode){
+		case 'y':
+
+		break;
+		case 'ym':
+		year = year - 7;
+		yearDraw();
+		break;
+		case 'ymd':
+		if(month != 1)
+		{
+			month --;
+		}else{
+			year --;
+			month = 12;
+		}
+		ymdDraw();
+		break;
 	}
-	ymdDraw();
 }
 
 function todayButton(){
 	year = today.getFullYear();
 	month = today.getMonth() + 1;
 	day = today.getDate();
-	ymdDraw();
+	switch(mode){
+		case 'y':
+
+		break;
+		case 'ym':
+		yearDraw();
+		break;
+		case 'ymd':
+		ymdDraw();
+		break;
+	}
 }
 
 function nextButton(){
-	if(month != 12)
-	{
-		month ++;
-	}else{
-		year ++;
-		month = 1;
+	switch(mode){
+		case 'y':
+
+		break;
+		case 'ym':
+		year = year + 7;
+		yearDraw();
+		break;
+		case 'ymd':
+		if(month != 12)
+		{
+			month ++;
+		}else{
+			year ++;
+			month = 1;
+		}
+		ymdDraw();
+		break;
 	}
-	ymdDraw();
 }
 
 function ySelectMode(){
@@ -117,6 +151,7 @@ function ySelectMode(){
 }
 
 function ymSelectMode(){
+	mode = 'ym';
 	headerDraw("ym");
 	ymDraw();
 	yearDraw();
@@ -124,6 +159,7 @@ function ymSelectMode(){
 }
 
 function ymdSelectMode(){
+	mode = 'ymd';
 	headerDraw("ymd");
 	ymdDraw();
 	bindingClickEventForHeaderButton();
