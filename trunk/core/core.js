@@ -179,7 +179,10 @@ function nextButton(){
 }
 
 function ySelectMode(){
-
+	mode = 'y';
+	headerDraw("y");
+	yearDraw();
+	bindingClickEventForHeaderButton();
 }
 
 function ymSelectMode(){
@@ -199,7 +202,7 @@ function ymdSelectMode(){
 
 function pushSelectedDate(pickeddate){
 	if(checkDuplicationData(pickeddate)){
-		//중복시 어떻게 이벤트를 발생시킬지 고민해봅시다.
+		alert("중복된 날짜를 선택하셨습니다.");
 	}else{
 		selectedDate.push(pickeddate);
 		console.log(selectedDate);
@@ -208,7 +211,7 @@ function pushSelectedDate(pickeddate){
 
 function pushSelectedMonth(pickedMonth){
 	if (checkDuplicationData(pickedMonth)) {
-
+		alert("중복된 날짜를 선택하셨습니다.");
 	}else{
 		selectedDate.push(pickedMonth);
 		console.log(selectedDate);
@@ -217,7 +220,7 @@ function pushSelectedMonth(pickedMonth){
 
 function pushSelectedYear(pickedYear){
 	if (checkDuplicationData(pickedYear)) {
-
+		alert("중복된 날짜를 선택하셨습니다.");
 	}else{
 		selectedDate.push(pickedYear);
 		console.log(selectedDate);
@@ -253,6 +256,9 @@ function bindingYearClickEvent(){
 	$("#yearSelect li").bind("click", function(e){
 		clickedYear = $(this).attr("dateValue");
 		console.log(clickedYear);
+		if(mode == 'y'){
+			pushSelectedYear(clickedYear);
+		}
 	});
 }
 
@@ -260,14 +266,11 @@ function bindingYearClickEvent(){
 
 function headerDraw(mode){
 	switch(mode){
-		case 'y':
-		var str = '';
-		break;
-		case 'ym':
-		var str = '<div id="header"><span id="left"><span id="modeSelectButtonGroup"><button id="y-select">년</button><button id="ym-select">년-월</button><button id="ymd-select">년-월-일</button></span></span><span id="center"><ul id="yearSelect"></ul></span><span id="right"><span id="moveButtonGroup"><button id="prev">이전</button><button id="today">오늘</button><button id="next">다음</button></span></span>';
-		break;
 		case 'ymd':
 		var str = '<div id="header"><span id="left"><span id="modeSelectButtonGroup"><button id="y-select">년</button><button id="ym-select">년-월</button><button id="ymd-select">년-월-일</button></span></span><span id="center"><h1 id="calendarTitle"><span id="year"></span>년 <span id="month"></span>월</h1></span><span id="right"><span id="moveButtonGroup"><button id="prev">이전</button><button id="today">오늘</button><button id="next">다음</button></span></span></div>';
+		break;
+		default:
+		var str = '<div id="header"><span id="left"><span id="modeSelectButtonGroup"><button id="y-select">년</button><button id="ym-select">년-월</button><button id="ymd-select">년-월-일</button></span></span><span id="center"><ul id="yearSelect"></ul></span><span id="right"><span id="moveButtonGroup"><button id="prev">이전</button><button id="today">오늘</button><button id="next">다음</button></span></span>';
 		break;
 	}
 	str += '<div id="content"></div>';
