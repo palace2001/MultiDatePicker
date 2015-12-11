@@ -117,6 +117,10 @@ function draw_LastBlank(){
 	return str;
 }
 
+/**
+ * Function : prevButton
+ *   - 1년전, 1달전으로 돌아감
+ */
 function prevButton(){
 	switch(mode){
 		case 'ymd':
@@ -136,6 +140,10 @@ function prevButton(){
 	}
 }
 
+/**
+ * Function : todayButton
+ *   - 다른날에서 오늘로 돌아감
+ */
 function todayButton(){
 	year = today.getFullYear();
 	month = today.getMonth() + 1;
@@ -150,6 +158,10 @@ function todayButton(){
 	}
 }
 
+/**
+ * Function : nextButton
+ *   - 
+ */
 function nextButton(){
 	switch(mode){
 		case 'ymd':
@@ -169,6 +181,10 @@ function nextButton(){
 	}
 }
 
+/**
+ * Function : ySelectMode
+ *   - 
+ */
 function ySelectMode(){
 	mode = 'y';
 	headerDraw("y");
@@ -176,6 +192,10 @@ function ySelectMode(){
 	bindingClickEventForHeaderButton();
 }
 
+/**
+ * Function : ymSelectMode
+ *   - 
+ */
 function ymSelectMode(){
 	mode = 'ym';
 	headerDraw("ym");
@@ -184,6 +204,10 @@ function ymSelectMode(){
 	bindingClickEventForHeaderButton();
 }
 
+/**
+ * Function : ymdSelectMode
+ *   - 
+ */
 function ymdSelectMode(){
 	mode = 'ymd';
 	headerDraw("ymd");
@@ -191,6 +215,10 @@ function ymdSelectMode(){
 	bindingClickEventForHeaderButton();
 }
 
+/**
+ * Function : pushSelectedDate
+ *   - 
+ */
 function pushSelectedDate(pickeddate){
 	if(checkDuplicationData(pickeddate)){
 		alert("중복된 날짜를 선택하셨습니다.");
@@ -200,6 +228,10 @@ function pushSelectedDate(pickeddate){
 	}
 }
 
+/**
+ * Function : pushSelectedMonth
+ *   - 
+ */
 function pushSelectedMonth(pickedMonth){
 	if (checkDuplicationData(pickedMonth)) {
 		alert("중복된 날짜를 선택하셨습니다.");
@@ -209,6 +241,10 @@ function pushSelectedMonth(pickedMonth){
 	}
 }
 
+/**
+ * Function : pushSelectedYear
+ *   - 
+ */
 function pushSelectedYear(pickedYear){
 	if (checkDuplicationData(pickedYear)) {
 		alert("중복된 날짜를 선택하셨습니다.");
@@ -218,6 +254,10 @@ function pushSelectedYear(pickedYear){
 	}
 }
 
+/**
+ * Function : checkDuplicationData
+ *   - 
+ */
 function checkDuplicationData(pickeddate){
 	for (var i = 0; i < selectedDate.length; i++) {
 		if(selectedDate[i] == pickeddate){
@@ -227,12 +267,20 @@ function checkDuplicationData(pickeddate){
 	return false;
 }
 
+/**
+ * Function : bindingDateClickEvent
+ *   - 
+ */
 function bindingDateClickEvent(){
 	$(".date").bind("click", function(e){	
 		pushSelectedDate($(this).attr("dateValue"));
 	});
 }
 
+/**
+ * Function : bindingMonthClickEvent
+ *   - 
+ */
 function bindingMonthClickEvent(){
 	$("#monthSelect li").bind("click", function(e){
 		if(clickedYear == null){
@@ -243,6 +291,10 @@ function bindingMonthClickEvent(){
 	});
 }
 
+/**
+ * Function : bindingYearClickEvent
+ *   - 
+ */
 function bindingYearClickEvent(){
 	$("#yearSelect li").bind("click", function(e){
 		clickedYear = $(this).attr("dateValue");
@@ -255,6 +307,10 @@ function bindingYearClickEvent(){
 
 //drawing functions area
 
+/**
+ * Function : headerDraw
+ *   - 
+ */
 function headerDraw(mode){
 	switch(mode){
 		case 'ymd':
@@ -268,6 +324,10 @@ function headerDraw(mode){
 	$(".multiDatePicker").empty().append(str);
 }
 
+/**
+ * Function : ymdDraw
+ *   - 
+ */
 function ymdDraw() {
 	var str = '<ul class="row">';
 	for (var i = 0; i < 7; i++) {
@@ -296,6 +356,10 @@ function ymdDraw() {
 	bindingDateClickEvent();
 }
 
+/**
+ * Function : ymDraw
+ *   - 
+ */
 function ymDraw(){
 	var str = '<ul id="monthSelect">';
 	for (var i = 1; i < 13; i++) {
@@ -305,6 +369,10 @@ function ymDraw(){
 	bindingMonthClickEvent();
 }
 
+/**
+ * Function : yearDraw
+ *   - 
+ */
 function yearDraw(){
 	var str = '';
 	for (var i = 0; i < 7; i++) {
@@ -314,6 +382,10 @@ function yearDraw(){
 	bindingYearClickEvent();
 }
 
+/**
+ * Function : setRowHeight
+ *   - 
+ */
 function setRowHeight(){
 	$(".date").each(function(){
 		var row = $(this).parent('.row');
