@@ -29,6 +29,8 @@ body {
           color: #3498db;
           text-align: center;
           cursor: pointer; }
+        .multiDatePicker #header #center #yearSelect .selected {
+          border: 1px solid red; }
     .multiDatePicker #header #right {
       text-align: right; }
   .multiDatePicker #content {

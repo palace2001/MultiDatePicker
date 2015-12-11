@@ -49,6 +49,10 @@ $calendarWidth : 100%;
 					text-align: center;
 					cursor: pointer;
 				}
+
+				.selected{
+				border: $border-line-width solid $selected-border-color;
+			}
 			}
 		}
 		#right{

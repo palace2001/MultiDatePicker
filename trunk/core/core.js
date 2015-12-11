@@ -252,8 +252,9 @@ function draw_prevBlank(){
  */
  function pushSelectedMonth(pickedMonth){
  	if (checkDuplicationData(pickedMonth)) {
- 		deletePickedDate(pickedMonth);
+ 		alert("이미선택했습니다.");
  	}else{
+ 		$("li[datevalue='"+clickedYear+"']").removeClass("selected");
  		selectedDate.push(pickedMonth);
  		console.log(selectedDate);
  	}
@@ -293,7 +294,7 @@ function draw_prevBlank(){
  function bindingDateClickEvent(){
  	$(".date").bind("click", function(e){
  		if($(this).attr("dateValue") !== undefined){
- 			pushSelectedDate($(this).attr("dateValue"));
+ 			pushSelectedDate($(this).attr("datevalue"));
  		}
  	});
  }
@@ -307,7 +308,7 @@ function draw_prevBlank(){
  		if(clickedYear == null){
  			alert("연도를 선택해 주세요!");
  		}else{
- 			pushSelectedMonth(clickedYear + '-' + $(this).attr("dateValue"));
+ 			pushSelectedMonth(clickedYear + '-' + $(this).attr("datevalue"));
  		}
  	});
  }
@@ -318,7 +319,8 @@ function draw_prevBlank(){
  */
  function bindingYearClickEvent(){
  	$("#yearSelect li").bind("click", function(e){
- 		clickedYear = $(this).attr("dateValue");
+ 		clickedYear = $(this).attr("datevalue");
+ 		addClassForSelected(clickedYear);
  		console.log(clickedYear);
  		if(mode == 'y'){
  			pushSelectedYear(clickedYear);
@@ -362,7 +364,7 @@ function draw_prevBlank(){
 
  	var dateNum = 1;
  	for(firstDay; dateNum <= get_day_max(year,month-1) ; firstDay++){
- 		str += '<li class="date" dateValue="' + year + '-' + month + '-' + dateNum + '">' + dateNum + '</li>';
+ 		str += '<li class="date" datevalue="' + year + '-' + month + '-' + dateNum + '">' + dateNum + '</li>';
  		if(firstDay%7==0){
  			str += '</ul><ul class="row">';
  		}
@@ -384,7 +386,7 @@ function draw_prevBlank(){
  function ymDraw(){
  	var str = '<ul id="monthSelect">';
  	for (var i = 1; i < 13; i++) {
- 		str += '<li class="date" dateValue="' + i + '">' + i + '</li>';
+ 		str += '<li class="date" datevalue="' + i + '">' + i + '</li>';
  	};
  	$("#content").append(str);
  	bindingMonthClickEvent();
@@ -397,7 +399,7 @@ function draw_prevBlank(){
  function yearDraw(){
  	var str = '';
  	for (var i = 0; i < 7; i++) {
- 		str += '<li class="date" dateValue="' + (year + i - 3) + '">' + (year + i - 3) + '</li>';
+ 		str += '<li class="date" datevalue="' + (year + i - 3) + '">' + (year + i - 3) + '</li>';
  	}
  	$("#yearSelect").empty().append(str);
  	bindingYearClickEvent();
