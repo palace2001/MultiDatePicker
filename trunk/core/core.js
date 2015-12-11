@@ -215,15 +215,33 @@ function ymdSelectMode(){
 	bindingClickEventForHeaderButton();
 }
 
+function addClassForSelected(pickeddate)
+{
+	$("li[datevalue='"+pickeddate+"']").addClass("selected");
+}
+
+function deletePickedDate(pickeddate)
+{
+	$("li[datevalue='"+pickeddate+"']").removeClass("selected");
+
+	for (var i = 0; i < selectedDate.length; i++) {
+		if(selectedDate[i] == pickeddate){
+			selectedDate.splice(i,1);
+			i--;
+		}
+	}
+}
+
 /**
  * Function : pushSelectedDate
  *   - 
  */
 function pushSelectedDate(pickeddate){
 	if(checkDuplicationData(pickeddate)){
-		alert("중복된 날짜를 선택하셨습니다.");
+		deletePickedDate(pickeddate);
 	}else{
 		selectedDate.push(pickeddate);
+		addClassForSelected(pickeddate);
 		console.log(selectedDate);
 	}
 }
@@ -234,7 +252,7 @@ function pushSelectedDate(pickeddate){
  */
 function pushSelectedMonth(pickedMonth){
 	if (checkDuplicationData(pickedMonth)) {
-		alert("중복된 날짜를 선택하셨습니다.");
+		deletePickedDate(pickeddate);
 	}else{
 		selectedDate.push(pickedMonth);
 		console.log(selectedDate);
@@ -247,7 +265,7 @@ function pushSelectedMonth(pickedMonth){
  */
 function pushSelectedYear(pickedYear){
 	if (checkDuplicationData(pickedYear)) {
-		alert("중복된 날짜를 선택하셨습니다.");
+		deletePickedDate(pickeddate);
 	}else{
 		selectedDate.push(pickedYear);
 		console.log(selectedDate);

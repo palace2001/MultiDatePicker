@@ -4,6 +4,7 @@ $calendarWidth : 960px;
 $border-line-width : 1px;
 $border-line-color-date : #3498db;
 $date-text-color : #3498db;
+$selected-border-color : red;
 
 body{
 	width:100%;
@@ -84,23 +85,27 @@ $calendarWidth : 100%;
 				text-align: center;
 				cursor: pointer;
 			}
+
+			.selected{
+				border: $border-line-width solid $selected-border-color;
+			}
 		}
 
 		#monthSelect{
-				width:100%;
+			width:100%;
+			margin: 0;
+			padding:0;
+
+			li{
+				display: inline-block;
 				margin: 0;
-				padding:0;
-				
-				li{
-					display: inline-block;
-					margin: 0;
-					padding: 0;
-					width: 8%;
-					border : $border-line-width solid $border-line-color-date;
-					color: $date-text-color;
-					text-align: center;
-					cursor: pointer;
-				}
+				padding: 0;
+				width: 8%;
+				border : $border-line-width solid $border-line-color-date;
+				color: $date-text-color;
+				text-align: center;
+				cursor: pointer;
 			}
+		}
 	}
 }
