@@ -201,10 +201,14 @@ function draw_prevBlank(){
  *   - 
  */
  function ySelectMode(){
+ 	if(mode == 'y'){
+ 		return false;
+ 	}
  	mode = 'y';
  	headerDraw("y");
  	yearDraw();
  	bindingClickEventForHeaderButton();
+ 	accessSelectedDateForAddClassSelected();
  }
 
 /**
@@ -212,11 +216,15 @@ function draw_prevBlank(){
  *   - 
  */
  function ymSelectMode(){
+ 	if(mode == 'ym'){
+ 		return false;
+ 	}
  	mode = 'ym';
  	headerDraw("ym");
  	ymDraw();
  	yearDraw();
  	bindingClickEventForHeaderButton();
+ 	accessSelectedDateForAddClassSelected();
  }
 
 /**
@@ -224,10 +232,14 @@ function draw_prevBlank(){
  *   - 
  */
  function ymdSelectMode(){
+ 	if(mode == 'ymd'){
+ 		return false;
+ 	}
  	mode = 'ymd';
  	headerDraw("ymd");
  	ymdDraw();
  	bindingClickEventForHeaderButton();
+ 	accessSelectedDateForAddClassSelected();
  }
 
  function addClassForSelected(pickeddate)
@@ -335,6 +347,9 @@ function draw_prevBlank(){
  */
  function bindingYearClickEvent(){
  	$("#yearSelect li").bind("click", function(e){
+ 		if(mode == 'ym'){
+ 			$(".selected").removeClass("selected");
+ 		}
  		clickedYear = $(this).attr("datevalue");
  		addClassForSelected(clickedYear);
  		console.log(clickedYear);
