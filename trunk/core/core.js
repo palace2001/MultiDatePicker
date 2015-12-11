@@ -416,3 +416,16 @@ function draw_prevBlank(){
  		$(this).css("height", rowheight);
  	});
  }
+
+ /**
+ * Function : clearDate
+ *   - 
+ */
+ function clearDate(){
+ 	$(".date").each(function(){
+ 		Array.clear(selectedDate);
+ 	});
+ }
+
+
+ 
