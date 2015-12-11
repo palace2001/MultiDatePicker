@@ -1,12 +1,18 @@
-body {
-  width: 100%; }
-
 .multiDatePicker {
-  width: 100%; }
+  width: 100%;
+  font-size: 1.5rem; }
   .multiDatePicker > * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0; }
+  .multiDatePicker button {
+    font-size: 1.5rem;
+    border: 1px solid red;
+    background-color: white;
+    cursor: pointer;
+    color: black; }
   .multiDatePicker #header {
     width: 100%; }
     .multiDatePicker #header #left, .multiDatePicker #header #center, .multiDatePicker #header #right {
@@ -15,7 +21,9 @@ body {
     .multiDatePicker #header #left {
       text-align: left; }
     .multiDatePicker #header #center {
-      text-align: center; }
+      text-align: center;
+      font-size: 1.5rem;
+      color: blue; }
       .multiDatePicker #header #center #yearSelect {
         width: 100%;
         margin: 0;
