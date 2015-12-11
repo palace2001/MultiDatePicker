@@ -2,17 +2,24 @@
 
 $calendarWidth : 960px;
 $border-line-width : 1px;
-$border-line-color-date : #3498db;
-$date-text-color : #3498db;
-$selected-border-color : red;
-$font-size : 1.5rem;
-$button-font-size : 1.5rem;
-$button-border-color : red;
-$button-background-color : white;
-$button-font-color : black;
+$selected-border-color : #3498db;
+$selected-font-color : white;
+$selected-background-color : #3498db;
+$font-size : 1.15rem;
+$button-font-size : 1rem;
+$button-border-color : 0;
+$button-background-color : #2C3E50;
+$button-font-color : white;
 $calendarWidth : 100%;
 $title-font-size : 1.5rem;
-$title-font-color : blue;
+$title-font-color : #3498db;
+$date-background-color : #ECF0F1;
+$date-text-color : #2C3E50;
+$border-line-color-date : #7f8c8d;
+
+body{
+	width:900px;
+}
 
 .multiDatePicker{
 
@@ -30,6 +37,8 @@ $title-font-color : blue;
 		background-color: $button-background-color;
 		cursor: pointer;
 		color: $button-font-color;
+		padding: 8px 5px;
+		border-radius : 5px;
 	}
 
 	width : $calendarWidth;
@@ -40,15 +49,16 @@ $title-font-color : blue;
 
 		#left, #center, #right{
 			display: inline-block;
-			width: 33%;
 		}
 		#left{
 			text-align: left;
+			width: 25%;
 		}
 		#center{
 			text-align: center;
 			font-size: $title-font-size;
 			color : $title-font-color;
+			width: 50%;
 
 			#yearSelect{
 				width:100%;
@@ -66,71 +76,97 @@ $title-font-color : blue;
 					cursor: pointer;
 				}
 
-				.selected{
-				border: $border-line-width solid $selected-border-color;
+				.date{
+					padding-top: calc(7% - #{$font-size});
+					padding-bottom : calc(7% - #{$font-size});
+					background-color : $date-background-color;
+				}
+					.selected{
+						color: $selected-font-color;
+						border: $border-line-width solid $selected-border-color;
+						background-color : $selected-background-color;
+					}
+				}
 			}
+			#right{
+				text-align: right;
+				width: 25%;
 			}
 		}
-		#right{
-			text-align: right;
-		}
-	}
 
-	#content{
+		#content{
 
-		width: 100%;
-		margin: 0;
-		padding:0;
-		text-align: center;
-
-		.row{
 			width: 100%;
-			list-style-type: disc;
-			-webkit-margin-before: 0em;
-			-webkit-margin-after: 0em;
-			-webkit-margin-start: 0px;
-			-webkit-margin-end: 0px;
-			-webkit-padding-start: 0px;
-			letter-spacing:-0.15em;
-			word-spacing:-0.15em;
-			padding:0;
-			margin: 0;
-
-			.date, .weekText{
-				display: inline-block;
-				margin: 0;
-				padding: 0;
-				width:14%;
-				border : $border-line-width solid $border-line-color-date;
-				color: $date-text-color;
-				text-align: center;
-				cursor: pointer;
-			}
-
-			.selected{
-				border: $border-line-width solid $selected-border-color;
-			}
-		}
-
-		#monthSelect{
-			width:100%;
 			margin: 0;
 			padding:0;
+			text-align: center;
 
-			li{
-				display: inline-block;
+			.row{
+				width: 100%;
+				list-style-type: disc;
+				-webkit-margin-before: 0em;
+				-webkit-margin-after: 0em;
+				-webkit-margin-start: 0px;
+				-webkit-margin-end: 0px;
+				-webkit-padding-start: 0px;
+				letter-spacing:-0.15em;
+				word-spacing:-0.15em;
+				padding:0;
 				margin: 0;
-				padding: 0;
-				width: 8%;
-				border : $border-line-width solid $border-line-color-date;
-				color: $date-text-color;
-				text-align: center;
-				cursor: pointer;
+
+				.date, .weekText{
+					display: inline-block;
+					margin: 0;
+					width:14%;
+					padding: 0;
+					border : $border-line-width solid $border-line-color-date;
+					color: $date-text-color;
+					text-align: center;
+					cursor: pointer;
+				}
+
+				.date{
+					padding-top: calc(7% - #{$font-size});
+					padding-bottom : calc(7% - #{$font-size});
+					background-color : $date-background-color;
+				}
+
+				.selected{
+					color: $selected-font-color;
+					border: $border-line-width solid $selected-border-color;
+					background-color : $selected-background-color;
+				}
 			}
 
-			.selected{
-				border: $border-line-width solid $selected-border-color;
+			#monthSelect{
+				width:100%;
+				margin: 0;
+				padding:0;
+				margin-top: 20px;
+				margin-bottom: 20px;
+
+				li{
+					display: inline-block;
+					margin: 0;
+					padding: 0;
+					width: 8%;
+					border : $border-line-width solid $border-line-color-date;
+					color: $date-text-color;
+					text-align: center;
+					cursor: pointer;
+				}
+
+				.date{
+					padding-top: calc(4% - #{$font-size});
+					padding-bottom : calc(4% - #{$font-size});
+					background-color : $date-background-color;
+				}
+
+				.selected{
+					color: $selected-font-color;
+					border: $border-line-width solid $selected-border-color;
+					background-color : $selected-background-color;
+				}
 			}
 		}
 	}
-}

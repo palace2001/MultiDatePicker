@@ -245,6 +245,7 @@ function draw_prevBlank(){
  			i--;
  		}
  	}
+ 	console.log(selectedDate);
  }
 
 /**
@@ -359,6 +360,7 @@ function draw_prevBlank(){
  		break;
  	}
  	str += '<div id="content"></div>';
+ 	str += '<div id="footer"><button onclick="clearDate();">선택초기화</button></div>';
  	$(".multiDatePicker").empty().append(str);
  }
 
@@ -425,11 +427,8 @@ function draw_prevBlank(){
  *   - 
  */
  function setRowHeight(){
- 	$(".date").each(function(){
- 		var row = $(this).parent('.row');
- 		var rowheight = $(row).height();
- 		$(this).css("height", rowheight);
- 	});
+ 	var width = $(".date").css("width");
+ 	$(".date").css("height", width);
  }
 
  /**
@@ -437,9 +436,9 @@ function draw_prevBlank(){
  *   - 
  */
  function clearDate(){
- 	$(".date").each(function(){
- 		Array.clear(selectedDate);
- 	});
+ 	selectedDate = [];
+ 	$(".selected").removeClass("selected");
+ 	console.log(selectedDate);
  }
 
 
