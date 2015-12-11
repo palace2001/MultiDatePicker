@@ -1,5 +1,5 @@
 body {
-  width: 900px; }
+  width: 640px; }
 
 .multiDatePicker {
   width: 100%;
@@ -60,6 +60,7 @@ body {
     padding: 0;
     text-align: center; }
     .multiDatePicker #content .row {
+      white-space: nowrap;
       width: 100%;
       list-style-type: disc;
       -webkit-margin-before: 0em;
