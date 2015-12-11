@@ -31,6 +31,7 @@ body {
       color: #3498db;
       width: 50%; }
       .multiDatePicker #header #center #yearSelect {
+        white-space: nowrap;
         width: 100%;
         margin: 0;
         padding: 0; }
