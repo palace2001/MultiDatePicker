@@ -138,6 +138,7 @@ function draw_prevBlank(){
  		yearDraw();
  		break;
  	}
+ 	accessSelectedDateForAddClassSelected();
  }
 
 /**
@@ -156,6 +157,7 @@ function draw_prevBlank(){
  		yearDraw();
  		break;
  	}
+ 	accessSelectedDateForAddClassSelected();
  }
 
 /**
@@ -179,6 +181,19 @@ function draw_prevBlank(){
  		yearDraw();
  		break;
  	}
+ 	accessSelectedDateForAddClassSelected();
+ }
+
+ function accessSelectedDateForAddClassSelected()
+ {
+ 	$(".date").each(function(){
+ 		for (var i = 0; i < selectedDate.length; i++) {
+ 			if($(this).attr("datevalue") == selectedDate[i]){
+ 				$(this).addClass("selected");
+ 			}
+ 		}
+ 	});
+ 	
  }
 
 /**
