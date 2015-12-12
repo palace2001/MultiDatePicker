@@ -1,4 +1,3 @@
-var convertDateToText = ["일", "월", "화", "수", "목", "금", "토"];
 var today = new Date();
 var year = today.getFullYear();
 var month = today.getMonth() + 1;
@@ -10,10 +9,8 @@ var selectedMonth = [];
 var selectedYear = [];
 
 var mode = '';
-
-$(document).ready(function(){
-	ymdSelectMode();
-});
+var footershow = true;
+var leftshow = true;
 
 function bindingClickEventForHeaderButton(){
 	$("#prev").bind("click", function(){
@@ -119,7 +116,8 @@ function draw_prevBlank(){
 
 /**
  * Function : prevButton
- *   - 1년전, 1달전으로 돌아감
+ *   - 이전 버튼에 binding된 함수
+ *	 - 년월일 모드에서는 달을 감소시키고, 그 외의 모드에서는 년을 감소시킴.
  */
  function prevButton(){
  	switch(mode){
@@ -162,7 +160,8 @@ function draw_prevBlank(){
 
 /**
  * Function : nextButton
- *   - 
+ *   - 다음 버튼에 binding된 함수
+ *	 - 년월일 모드에서는 달을 증가시키고, 그 외의 모드에서는 년을 증가시킴.
  */
  function nextButton(){
  	switch(mode){
@@ -198,7 +197,7 @@ function draw_prevBlank(){
 
 /**
  * Function : ySelectMode
- *   - 
+ *   - [년] 버튼에 binding되어있는 함수.
  */
  function ySelectMode(){
  	if(mode == 'y'){
@@ -209,11 +208,13 @@ function draw_prevBlank(){
  	yearDraw();
  	bindingClickEventForHeaderButton();
  	accessSelectedDateForAddClassSelected();
+ 	if (!leftshow) {leftMenuHide()};
+ 	if (!footershow) {clearButtonHide()};
  }
 
 /**
  * Function : ymSelectMode
- *   - 
+ *   - [년-월] 버튼에 binding되어있는 함수.
  */
  function ymSelectMode(){
  	if(mode == 'ym'){
@@ -225,11 +226,13 @@ function draw_prevBlank(){
  	yearDraw();
  	bindingClickEventForHeaderButton();
  	accessSelectedDateForAddClassSelected();
+ 	if (!leftshow) {leftMenuHide()};
+ 	if (!footershow) {clearButtonHide()};
  }
 
 /**
  * Function : ymdSelectMode
- *   - 
+ *   - [년-월-일] 버튼에 binding되어있는 함수.
  */
  function ymdSelectMode(){
  	if(mode == 'ymd'){
@@ -240,13 +243,25 @@ function draw_prevBlank(){
  	ymdDraw();
  	bindingClickEventForHeaderButton();
  	accessSelectedDateForAddClassSelected();
+ 	if (!leftshow) {leftMenuHide()};
+ 	if (!footershow) {clearButtonHide()};
  }
 
+ /**
+  *	Function : addClassForSelected
+  *		- 날짜 선택 시, datevalue 속성이 해당 날짜 값인 요소를 찾아 selected 클래스를 부여.
+  *		- css(scss)에서 선택 시 시각적 효과를 제어할 수 있음.
+  */
  function addClassForSelected(pickeddate)
  {
  	$("li[datevalue='"+pickeddate+"']").addClass("selected");
  }
 
+/**
+  *	Function : deletePickedDate
+  *		- 날짜 선택 시, datevalue 속성이 해당 날짜 값인 요소를 찾아 selected 클래스를 제거하고,
+  *			selectedDate에서 해당 날짜 값을 찾아 배열에서 제거.
+  */
  function deletePickedDate(pickeddate)
  {
  	$("li[datevalue='"+pickeddate+"']").removeClass("selected");
@@ -262,7 +277,9 @@ function draw_prevBlank(){
 
 /**
  * Function : pushSelectedDate
- *   - 
+ *	 - ymdMode에서 날짜를 선택하는 함수
+ *   - 중복된 날짜인지 검사하여 중복된 날짜라면 selectedDate에서 해당 날짜를 제거하고 deletePickedDate 함수로 이행
+ *	 - 중복된 날짜가 아니라면 selectedDate에 해당 날짜를 push하고 addClassForSelected 함수로 이행
  */
  function pushSelectedDate(pickeddate){
  	if(checkDuplicationData(pickeddate)){
@@ -276,7 +293,7 @@ function draw_prevBlank(){
 
 /**
  * Function : pushSelectedMonth
- *   - 
+ *   - ymMode에서 날짜를 선택하는 함수
  */
  function pushSelectedMonth(pickedMonth){
  	if (checkDuplicationData(pickedMonth)) {
@@ -290,7 +307,7 @@ function draw_prevBlank(){
 
 /**
  * Function : pushSelectedYear
- *   - 
+ *   - yMode에서 날짜를 선택하는 함수
  */
  function pushSelectedYear(pickedYear){
  	if (checkDuplicationData(pickedYear)) {
@@ -304,7 +321,7 @@ function draw_prevBlank(){
 
 /**
  * Function : checkDuplicationData
- *   - 
+ *   - 중복된 날짜가 있는지 체크하고 여부를 반환
  */
  function checkDuplicationData(pickeddate){
  	for (var i = 0; i < selectedDate.length; i++) {
@@ -317,7 +334,7 @@ function draw_prevBlank(){
 
 /**
  * Function : bindingDateClickEvent
- *   - 
+ *   - date클래스가 부여된 요소 중 datevalue가 undefiend인 요소인지 검사 후 selectedDate에 값을 넣는 절차를 binding하는 함수 
  */
  function bindingDateClickEvent(){
  	$(".date").bind("click", function(e){
@@ -329,7 +346,7 @@ function draw_prevBlank(){
 
 /**
  * Function : bindingMonthClickEvent
- *   - 
+ *   - 미리 선택된 년도와 선택한 월을 0000-00의 형식으로 가공하여 selectedDate에 넣는 함수
  */
  function bindingMonthClickEvent(){
  	$("#monthSelect li").bind("click", function(e){
@@ -343,7 +360,7 @@ function draw_prevBlank(){
 
 /**
  * Function : bindingYearClickEvent
- *   - 
+ *   - 각 모드에 따라 년도 버튼이 작동하는 방식을 정의한 함수
  */
  function bindingYearClickEvent(){
  	$("#yearSelect li").bind("click", function(e){
@@ -363,7 +380,7 @@ function draw_prevBlank(){
 
 /**
  * Function : headerDraw
- *   - 
+ *   - 각 모드에 맞는 초기템플릿을 그림.
  */
  function headerDraw(mode){
  	switch(mode){
@@ -381,7 +398,7 @@ function draw_prevBlank(){
 
 /**
  * Function : ymdDraw
- *   - 
+ *   - ymd모드의 템플릿을 그림
  */
  function ymdDraw() {
  	var str = '<ul class="row">';
@@ -413,7 +430,7 @@ function draw_prevBlank(){
 
 /**
  * Function : ymDraw
- *   - 
+ *   - ym모드의 템플릿을 그림
  */
  function ymDraw(){
  	var str = '<ul id="monthSelect">';
@@ -426,7 +443,7 @@ function draw_prevBlank(){
 
 /**
  * Function : yearDraw
- *   - 
+ *   - y모드의 템플릿을 그림
  */
  function yearDraw(){
  	var str = '';
@@ -439,16 +456,35 @@ function draw_prevBlank(){
 
 /**
  * Function : setRowHeight
- *   - 
+ *   - 날짜 선택 부분을 정사각형 모양으로 가공
  */
  function setRowHeight(){
  	var width = $(".date").css("width");
  	$(".date").css("height", width);
  }
 
+/**
+ * Function : leftMenuHide
+ *   - 모드 선택 부분을 가리는 함수
+ */
+ function leftMenuHide()
+ {
+ 	$("#left").empty();
+ 	leftshow = false;
+ }
+/**
+ * Function : leftMenuHide
+ *   - 선택 초기화 부분을 가리는 함수
+ */
+ function clearButtonHide()
+ {
+ 	$("#footer").empty();
+ 	footershow = false;
+ }
+
  /**
  * Function : clearDate
- *   - 
+ *   - 선택 초기화 버튼 기능
  */
  function clearDate(){
  	selectedDate = [];
