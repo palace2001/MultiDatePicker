@@ -206,7 +206,7 @@ function draw_prevBlank(){
  			case 'ym':
  			for (var i = 0; i < selectedDate.length; i++) {
  				var dateForCheckYear = selectedDate[i].split("-");
- 				if($(this).attr("datevalue") == dateForCheckYear[0]){
+ 				if(dateForCheckYear.length == 2 && $(this).attr("datevalue") == dateForCheckYear[0]){
  					$(this).addClass("selected");
  				}
  			}
@@ -328,7 +328,7 @@ function draw_prevBlank(){
  		var non = true;
  		for (var i = 0; i < selectedDate.length; i++) {
  			var dateForCheckYear = selectedDate[i].split("-");
- 			if(dateForCheckYear[0] == clickedYear){
+ 			if(dateForCheckYear.length == 2 && dateForCheckYear[0] == clickedYear){
  				non = false;
  			}
  		}
@@ -402,7 +402,17 @@ function draw_prevBlank(){
  	$("#yearSelect li").bind("click", function(e){
  		clickedYear = $(this).attr("datevalue");
  		addClassForSelected(clickedYear);
- 		ymDraw();
+ 		if(mode == 'ym'){
+ 			ymDraw();
+ 			$(".selected").removeClass("selected");
+ 			$(this).addClass("selected");
+ 			for (var i = 0; i < selectedDate.length; i++) {
+ 				var dateForCheckYear = selectedDate[i].split("-");
+ 				if(dateForCheckYear.length == 2 && $(".date").attr("datevalue") == dateForCheckYear[0]){
+ 					$(this).addClass("selected");
+ 				}
+ 			}
+ 		}
  		accessSelectedDateForAddClassSelected();
  		console.log(clickedYear);
  		if(mode == 'y'){
