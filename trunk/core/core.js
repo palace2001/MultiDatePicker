@@ -202,15 +202,21 @@ function draw_prevBlank(){
  function accessSelectedDateForAddClassSelected()
  {
  	$(".date").each(function(){
+ 		$(this).removeClass("selected");
  		switch(mode){
  			case 'ym':
+ 			if ($(this).attr("datevalue") == clickedYear) {
+ 				$(this).addClass("selected");
+ 			}
  			for (var i = 0; i < selectedDate.length; i++) {
  				var dateForCheckYear = selectedDate[i].split("-");
  				if(dateForCheckYear.length == 2 && $(this).attr("datevalue") == dateForCheckYear[0]){
  					$(this).addClass("selected");
+ 				}else if(dateForCheckYear.length == 2 && $(this).attr("datevalue") == selectedDate[i]){
+ 					$(this).addClass("selected");
  				}
  			}
-
+ 			break;
  			default:
  			for (var i = 0; i < selectedDate.length; i++) {
  				if($(this).attr("datevalue") == selectedDate[i]){
@@ -248,9 +254,10 @@ function draw_prevBlank(){
  		return false;
  	}
  	mode = 'ym';
+ 	clickedYear = null;
  	headerDraw("ym");
- 	ymDraw();
  	yearDraw();
+ 	ymDraw();
  	bindingClickEventForHeaderButton();
  	accessSelectedDateForAddClassSelected();
  	if (!leftshow) {leftMenuHide()};
@@ -401,18 +408,10 @@ function draw_prevBlank(){
  function bindingYearClickEvent(){
  	$("#yearSelect li").bind("click", function(e){
  		clickedYear = $(this).attr("datevalue");
- 		addClassForSelected(clickedYear);
  		if(mode == 'ym'){
  			ymDraw();
- 			$(".selected").removeClass("selected");
- 			$(this).addClass("selected");
- 			for (var i = 0; i < selectedDate.length; i++) {
- 				var dateForCheckYear = selectedDate[i].split("-");
- 				if(dateForCheckYear.length == 2 && $(".date").attr("datevalue") == dateForCheckYear[0]){
- 					$(this).addClass("selected");
- 				}
- 			}
  		}
+ 		addClassForSelected(clickedYear);
  		accessSelectedDateForAddClassSelected();
  		console.log(clickedYear);
  		if(mode == 'y'){
