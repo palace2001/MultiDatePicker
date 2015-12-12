@@ -3,7 +3,7 @@ var year = today.getFullYear();
 var month = today.getMonth() + 1;
 var day = today.getDate();
 
-var clickedYear = null;
+var clickedYear = today.getFullYear();;
 var selectedDate = [];
 var selectedMonth = [];
 var selectedYear = [];
@@ -131,6 +131,12 @@ function draw_prevBlank(){
  		}
  		ymdDraw();
  		break;
+ 		case 'ym':
+ 		year = year - 7;
+ 		clickedYear = null;
+ 		yearDraw();
+ 		ymDraw();
+ 		break;
  		default:
  		year = year - 7;
  		yearDraw();
@@ -150,6 +156,10 @@ function draw_prevBlank(){
  	switch(mode){
  		case 'ymd':
  		ymdDraw();
+ 		break;
+ 		case 'ym':
+ 		yearDraw();
+ 		ymDraw();
  		break;
  		default:
  		yearDraw();
@@ -175,7 +185,13 @@ function draw_prevBlank(){
  		}
  		ymdDraw();
  		break;
- 		default:
+ 		case 'ym':
+ 		year = year + 7;
+ 		clickedYear = null;
+ 		yearDraw();
+ 		ymDraw();
+ 		break;
+ 		case 'y':
  		year = year + 7;
  		yearDraw();
  		break;
@@ -186,14 +202,25 @@ function draw_prevBlank(){
  function accessSelectedDateForAddClassSelected()
  {
  	$(".date").each(function(){
- 		for (var i = 0; i < selectedDate.length; i++) {
- 			if($(this).attr("datevalue") == selectedDate[i]){
- 				$(this).addClass("selected");
+ 		switch(mode){
+ 			case 'ym':
+ 			for (var i = 0; i < selectedDate.length; i++) {
+ 				var dateForCheckYear = selectedDate[i].split("-");
+ 				if($(this).attr("datevalue") == dateForCheckYear[0]){
+ 					$(this).addClass("selected");
+ 				}
  			}
+
+ 			default:
+ 			for (var i = 0; i < selectedDate.length; i++) {
+ 				if($(this).attr("datevalue") == selectedDate[i]){
+ 					$(this).addClass("selected");
+ 				}
+ 			}
+ 			break;
  		}
  	});
- 	
- }
+}
 
 /**
  * Function : ySelectMode
@@ -252,28 +279,28 @@ function draw_prevBlank(){
   *		- 날짜 선택 시, datevalue 속성이 해당 날짜 값인 요소를 찾아 selected 클래스를 부여.
   *		- css(scss)에서 선택 시 시각적 효과를 제어할 수 있음.
   */
- function addClassForSelected(pickeddate)
- {
- 	$("li[datevalue='"+pickeddate+"']").addClass("selected");
- }
+  function addClassForSelected(pickeddate)
+  {
+  	$("li[datevalue='"+pickeddate+"']").addClass("selected");
+  }
 
 /**
   *	Function : deletePickedDate
   *		- 날짜 선택 시, datevalue 속성이 해당 날짜 값인 요소를 찾아 selected 클래스를 제거하고,
   *			selectedDate에서 해당 날짜 값을 찾아 배열에서 제거.
   */
- function deletePickedDate(pickeddate)
- {
- 	$("li[datevalue='"+pickeddate+"']").removeClass("selected");
+  function deletePickedDate(pickeddate)
+  {
+  	$("li[datevalue='"+pickeddate+"']").removeClass("selected");
 
- 	for (var i = 0; i < selectedDate.length; i++) {
- 		if(selectedDate[i] == pickeddate){
- 			selectedDate.splice(i,1);
- 			i--;
- 		}
- 	}
- 	console.log(selectedDate);
- }
+  	for (var i = 0; i < selectedDate.length; i++) {
+  		if(selectedDate[i] == pickeddate){
+  			selectedDate.splice(i,1);
+  			i--;
+  		}
+  	}
+  	console.log(selectedDate);
+  }
 
 /**
  * Function : pushSelectedDate
@@ -297,9 +324,17 @@ function draw_prevBlank(){
  */
  function pushSelectedMonth(pickedMonth){
  	if (checkDuplicationData(pickedMonth)) {
- 		alert("이미선택했습니다.");
+ 		deletePickedDate(pickedMonth);
+ 		var non = true;
+ 		for (var i = 0; i < selectedDate.length; i++) {
+ 			var dateForCheckYear = selectedDate[i].split("-");
+ 			if(dateForCheckYear[0] == clickedYear){
+ 				non = false;
+ 			}
+ 		}
+ 		if (non) {$(".selected[datevalue='" + clickedYear + "']").removeClass("selected");}
  	}else{
- 		$("li[datevalue='"+clickedYear+"']").removeClass("selected");
+ 		addClassForSelected(pickedMonth);
  		selectedDate.push(pickedMonth);
  		console.log(selectedDate);
  	}
@@ -313,6 +348,7 @@ function draw_prevBlank(){
  	if (checkDuplicationData(pickedYear)) {
  		deletePickedDate(pickedYear);
  	}else{
+ 		$("li[datevalue='"+clickedYear+"']").removeClass("selected");
  		selectedDate.push(pickedYear);
  		addClassForSelected(pickedYear);
  		console.log(selectedDate);
@@ -353,7 +389,7 @@ function draw_prevBlank(){
  		if(clickedYear == null){
  			alert("연도를 선택해 주세요!");
  		}else{
- 			pushSelectedMonth(clickedYear + '-' + $(this).attr("datevalue"));
+ 			pushSelectedMonth($(this).attr("datevalue"));
  		}
  	});
  }
@@ -364,11 +400,10 @@ function draw_prevBlank(){
  */
  function bindingYearClickEvent(){
  	$("#yearSelect li").bind("click", function(e){
- 		if(mode == 'ym'){
- 			$(".selected").removeClass("selected");
- 		}
  		clickedYear = $(this).attr("datevalue");
  		addClassForSelected(clickedYear);
+ 		ymDraw();
+ 		accessSelectedDateForAddClassSelected();
  		console.log(clickedYear);
  		if(mode == 'y'){
  			pushSelectedYear(clickedYear);
@@ -435,9 +470,9 @@ function draw_prevBlank(){
  function ymDraw(){
  	var str = '<ul id="monthSelect">';
  	for (var i = 1; i < 13; i++) {
- 		str += '<li class="date" datevalue="' + i + '">' + i + '</li>';
+ 		str += '<li class="date" datevalue="' + clickedYear + "-" + i + '">' + i + '</li>';
  	};
- 	$("#content").append(str);
+ 	$("#content").empty().append(str);
  	bindingMonthClickEvent();
  }
 
