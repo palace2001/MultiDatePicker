@@ -8,16 +8,16 @@ QUnit.test( "Final Test", function( assert ) {
 
 
 	// Today Setting for Testing ...
-	var resultSetday = set_Today();
-	var resultTypeofsetday = typeof(set_Today());
+	//var resultSetday = set_Today();  // 옵션부로 이동.
+	//var resultTypeofsetday = typeof(set_Today());
 	var resultFirstday = get_FirstDay();
 	var resultLastday = get_LastDay();
 	var resultDayMax1 = get_day_max(2015,12-1);  // ex) December
 	var resultDayMax2 = get_day_max(2016,2-1);  // ex) February
 	
 
-	equal(resultSetday, '금',"Testing Passed!");
-	equal(resultTypeofsetday, 'string',"Testing Passed!");
+	//equal(resultSetday, '금',"Testing Passed!");
+	//equal(resultTypeofsetday, 'string',"Testing Passed!");
 	equal(resultFirstday, 2,"Testing Passed!");
 	equal(resultLastday, 4,"Testing Passed!");
 	equal(resultDayMax1, 31,"Testing Passed!");
